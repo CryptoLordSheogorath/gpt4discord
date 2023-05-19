@@ -19,3 +19,11 @@ Installation Instructions
 5. Double check that the model pointed to in aibot.py is your default model, and that your GPT4all is in server mode 
 6. run discord_client.py 
 
+Now has three modes: 
+$newstory - creates new char
+$hello - continues with story 
+$instruct - standard chatbot 
+
+Finally working with larger uncensored stable vicuna (as was the intent, see "vicky" names for functions lmao) though I'm sure some better prompt engineering would help make things smoother. 
+I had to shorten the history function for instruct, but depending on the personality of your discord server users, you may be able to lengthen it back to 3k. 
+Some of these functions are not done the most effecient way possible.... they're done the easiest way to change possible. Customization FTW! Maybe I can get it to play DND 

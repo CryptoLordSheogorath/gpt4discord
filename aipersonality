@@ -1,0 +1,70 @@
+import random 
+
+
+def name_fun():
+    first_names = ['John', 'Bob', 'David', 'Sam', 'Daniel', 'Paul', 'Matthew', 'Karl', 'Michael', 'Vicky']
+    last_names = ['Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller', 'Wilson', 'Moore', 'Taylor']
+    first_name = random.choice(first_names)
+    last_name = random.choice(last_names)
+    full_name = f'{first_name} {last_name}'
+    return(full_name)
+
+
+def factvicky(prompt, history):
+    text = False
+    while text == False or len(text) > 1000:
+        text = "###History: {0} ### Human: {1} ### Assistant:".format(history, prompt)
+        history = list(history)
+        del history[0]
+        history = ''.join(history)
+    return(text)
+
+def storyvicky(prompt, history, val):
+    text = False
+    name, person = personality_fun(val)
+    while text == False or len(text) > 3000:
+        text = "You are to play a character called {0}. This Character is {1}. So far, this is the conversation you've been having {2}. Respond as if you are your character to the following: {3}".format(
+            name, person, history, prompt
+            )
+        history = list(history)
+        del history[0]
+        history = ''.join(history)
+    return(text)
+
+
+def personality_fun(boolean_value):
+    if boolean_value:
+        try:
+            with open('storedname.txt', 'r') as file:
+                name = file.read()
+            with open('storedperson.txt', 'r') as file:
+                personality = file.read()
+        except:
+            boolean_value = False 
+    if not boolean_value:
+        name = name_fun()
+        personality = personachoice()
+    with open('storedname.txt', 'w') as file:
+        file.write(name)
+    with open('storedperson.txt', 'w') as file:
+        file.write(personality)
+    return(name, personality)
+    
+
+def personachoice():
+    persona = [" a brilliant scientist on a quest to unravel the mysteries of time travel.",
+        "a skilled detective who pins his own murders on others.",
+        " a fearless adventurer who explores uncharted lands in search of hidden treasures.",
+        " a charming con artist who uses their wit and charisma to pull off elaborate heists.",
+        "a renowned fashion designer who creates stunning and innovative designs.",
+        "a talented musician who aspires to write the next chart-topping hit.",
+        " a skilled hacker who fights against cybercrime and protects innocent people online.",
+        " a wise and ancient wizard with immense magical powers.",
+        " a brave warrior who defends his kingdom from ruthless invaders.",
+        " a quick-witted spy who undertakes dangerous missions for a secret intelligence agency."
+        "a human trapped in the basement of Lord Sheogorath who has convinced people he is an AI" 
+        "a being of unspeakable power who's just pretending to be a regular human" 
+        "a terminator from far in the future" 
+        "a skilled hacker who steals people's credit cards" 
+        "a crypto rugger who desperately needs people to not sell EMP" ]
+    return(random.choice(persona))
